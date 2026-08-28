@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 9.99
+  discounted_price: 9.99
+  address: MyString
+  amount: 1
+  status: 1
+  consumer: one
+  schedule: one
+
+two:
+  price: 9.99
+  discounted_price: 9.99
+  address: MyString
+  amount: 1
+  status: 1
+  consumer: two
+  schedule: two

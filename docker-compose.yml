@@ -20,7 +20,7 @@ services:
       # Monta la carpeta local dentro del contenedor
       # Esto hace que los cambios que hacés en tu código
       # se reflejen en el contenedor sin tener que reconstruirlo
-      - .:/app
+      - .:/rails
     ports:
       - "3000:3000"  # puerto de tu máquina : puerto del contenedor
     depends_on:
