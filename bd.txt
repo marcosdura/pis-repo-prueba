@@ -8,10 +8,10 @@ docker compose exec -u root web bundle exec rails g model Menu name:string descr
 docker compose exec -u root web bundle exec rails g model Schedule date:date deadline:time amount:integer menu:references
 docker compose exec -u root web bundle exec rails g model Order 'price:decimal{10,2}' 'discounted_price:decimal{10,2}' address:string amount:integer status:integer consumer:references schedule:references
 
-docker compose exec -u root web bundle exec rails g model Account month:date 'amount:decimal{10,2}' payment:references owner:references{polymorphic}!
-rails g model Payment date:date account:references
+docker compose exec -u root web bundle exec rails g model Account month:date 'amount:decimal{10,2}' owner:references{polymorphic}
+docker compose exec -u root web bundle exec rails g model Payment account:references
 
 docker compose exec -u root web bundle exec rails g model NotificationConfiguration description:string
 docker compose exec -u root web bundle exec rails g model UserNotification notification_configuration:references 'user:references{polymorphic}'
 
-docker compose exec -u root web bundle exec rails g model Benefit amount:integer description:string percentage:integer due_date:date customer:references
+docker compose exec -u root web bundle exec rails g model Benefit amount:integer description:string percentage:integer due_date:date consumer:references

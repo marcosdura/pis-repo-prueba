@@ -5,7 +5,7 @@ class CreateBenefits < ActiveRecord::Migration[7.2]
       t.string :description
       t.integer :percentage
       t.date :due_date
-      t.references :customer, null: false, foreign_key: true
+      t.references :consumer, null: false, foreign_key: true
 
       t.timestamps
     end

@@ -5,11 +5,11 @@ one:
   description: MyString
   percentage: 1
   due_date: 2026-08-28
-  customer: one
+  consumer: one
 
 two:
   amount: 1
   description: MyString
   percentage: 1
   due_date: 2026-08-28
-  customer: two
+  consumer: two

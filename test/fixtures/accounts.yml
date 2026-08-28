@@ -3,13 +3,11 @@
 one:
   month: 2026-08-28
   amount: 9.99
-  payment: one
   owner: one
   owner_type: Owner
 
 two:
   month: 2026-08-28
   amount: 9.99
-  payment: two
   owner: two
   owner_type: Owner

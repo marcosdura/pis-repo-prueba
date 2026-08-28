@@ -1,4 +1,4 @@
 class Account < ApplicationRecord
-  belongs_to :payment
+  has_one :payment
   belongs_to :owner, polymorphic: true
 end
