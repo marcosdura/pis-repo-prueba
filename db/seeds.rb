@@ -18,5 +18,7 @@ schedule = Schedule.create! menu: menu, date: Date.today, deadline: Time.now + 3
 order = Order.create! consumer: consumer, schedule: schedule, price: 300, discounted_price: 0, amount: 1
 account = Account.create! amount: 300, month: Date.today, owner: consumer
 # account.orders << order
-
 Payment.create! account: account
+
+notification_config = NotificationConfiguration.create! description: 'Notificaciones de orden en camino'
+notification_config.consumers << consumer
