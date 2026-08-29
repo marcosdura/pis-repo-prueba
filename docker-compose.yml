@@ -13,14 +13,16 @@ services:
 
   # Contenedor del servidor Rails
   web:
-    build: .   # construye la imagen usando el Dockerfile de esta carpeta
+    build:    # construye la imagen usando el Dockerfile de esta carpeta
+      context: .
+      dockerfile: Dockerfile.dev
     command: bash -c "bundle exec rails db:create db:migrate && bundle exec rails server -b 0.0.0.0"
     #                  ^-- crea la BD si no existe    ^-- corre las migraciones    ^-- levanta el servidor
     volumes:
       # Monta la carpeta local dentro del contenedor
       # Esto hace que los cambios que hacés en tu código
       # se reflejen en el contenedor sin tener que reconstruirlo
-      - .:/app
+      - .:/rails
     ports:
       - "3000:3000"  # puerto de tu máquina : puerto del contenedor
     depends_on:
@@ -32,6 +34,19 @@ services:
       RAILS_ENV: development
       SECRET_KEY_BASE: desarrollo_local_no_importa_el_valor
 
+  vite:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+
+    command: bin/vite dev 
+
+    volumes:
+      - .:/rails
+    ports:
+      - "3036:3036"
+    environment:
+      RAILS_ENV: development
 # Define el volumen donde se guardan los datos de PostgreSQL
 volumes:
   postgres_data:

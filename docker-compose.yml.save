@@ -1,0 +1,35 @@
+services:
+
+  # Contenedor de la base de datos
+  db:
+    image: postgres:16        # usa la imagen oficial de PostgreSQL 16
+    environment:
+      POSTGRES_USER: postgres     # usuario de la base de datos
+      POSTGRES_PASSWORD: postgres # contraseña
+    volumes:
+      # Guarda los datos de la BD en un volumen persistente
+      # Sin esto, cada vez que apagás Docker perdés todos los datos
+      - postgres_data:/var/lib/postgresql/dat  # Contenedor del servidor Rails
+  web:
+    build: .   # construye la imagen usando el Dockerfile de esta carpeta
+    command: bash -c "bundle exec rails db:create db:migrate && bundle exec rails server -b 0.0.0.0"
+    #                  ^-- crea la BD si no existe    ^-- corre las migraciones    ^-- levanta el servidor
+    volumes:
+      # Monta la carpeta local dentro del contenedor
+      # Esto hace que los cambios que hacés en tu código
+      # se reflejen en el contenedor sin tener que reconstruirlo
+      - .:/rails
+    ports:
+      - "3000:3000"  # puerto de tu máquina : puerto del contenedor
+    depends_on:
+      - db           # espera a que el contenedor de la BD esté listo antes de arrancar
+    environment:
+      # Le dice a Rails cómo conectarse a la BD
+      # "db" es el nombre del servicio de arriba, Docker lo resuelve automáticamente
+      DATABASE_URL: postgresql://postgres:postgres@db/gogrow_development
+      RAILS_ENV: development
+      SECRET_KEY_BASE: desarrollo_local_no_importa_el_valor
+
+# Define el volumen donde se guardan los datos de PostgreSQL
+volumes:
+  postgres_data:
